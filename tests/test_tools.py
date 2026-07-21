@@ -1,5 +1,5 @@
-import swis.core as core
-from swis.core import SwisConfig, SwisToolRunner
+import core
+from core import SwisConfig, SwisToolRunner
 
 def test_trivy_image(monkeypatch):
     def fake_run_cmd(cmd):

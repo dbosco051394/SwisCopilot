@@ -1,9 +1,10 @@
 import pytest
-from swis.core import SwisConfig, SwisRunner, ToolResult, PolicyEngine
+from core import SwisConfig, SwisRunner, ToolResult, PolicyEngine
+import os
 
 def test_profile_strict():
     cfg = SwisConfig()
-    cfg.profile = "strict"
+    os.environ["SWIS_PROFILE"] = "strict"
     cfg.__init__()  # re-init to apply profile
     assert cfg.severity == "HIGH,CRITICAL"
     assert cfg.ignore_unfixed is False

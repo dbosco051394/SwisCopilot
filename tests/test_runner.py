@@ -1,6 +1,6 @@
 import pytest
-from swis.core import SwisConfig, SwisRunner, ToolResult
-import swis.core as core
+from core import SwisConfig, SwisRunner, ToolResult
+import core
 
 def test_run_all_tools(monkeypatch):
     def fake_run_cmd(cmd):

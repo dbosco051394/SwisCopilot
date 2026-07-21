@@ -19,8 +19,11 @@ jobs:
       - name: Install dependencies
         run: pip3 install pytest rich pyyaml
 
+      - name: Print Working Directory
+        run: pwd
+
       - name: Run unit tests
-        run: pytest -q
+        run: python -m pytest -q
 
   build-and-push:
     needs: test
