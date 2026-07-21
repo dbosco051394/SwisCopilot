@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/myapp:$COMMIT_SHA', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'run', '--rm',
+        '-v', '/workspace:/workspace',
+        '-w', '/workspace',
+        'docker.io/dbosco051394/swis:latest',
+        'SWIS_TOOL=all',
+        'SWIS_PROFILE=balanced',
+        'SWIS_OUTPUT=json',
+        "SWIS_IMAGE=gcr.io/$PROJECT_ID/myapp:$COMMIT_SHA",
+        'SWIS_IAC_PATH=/workspace/iac'
+      ]
+images:
+  - 'gcr.io/$PROJECT_ID/myapp:$COMMIT_SHA'

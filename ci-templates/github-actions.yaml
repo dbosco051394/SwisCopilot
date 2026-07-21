@@ -1,0 +1,25 @@
+name: Swis Security Scan
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  swis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build app image
+        run: docker build -t myapp:${{ github.sha }} .
+
+      - name: Run Swis
+        run: |
+          docker run --rm \
+            -v "${PWD}:/workspace" -w /workspace \
+            docker.io/dbosco051394/swis:latest \
+            SWIS_TOOL=all \
+            SWIS_PROFILE=strict \
+            SWIS_OUTPUT=sarif \
+            SWIS_IMAGE=myapp:${{ github.sha }} \
+            SWIS_IAC_PATH=/workspace/iac
