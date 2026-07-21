@@ -1,4 +1,4 @@
-from core import SwisConfig
+from swis.core import SwisConfig
 
 def test_strict_profile():
     cfg = SwisConfig()

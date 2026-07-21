@@ -1,4 +1,4 @@
-from core import PolicyEngine, ToolResult
+from swis.core import PolicyEngine, ToolResult
 
 def test_policy_deny():
     engine = PolicyEngine("tests/fixtures/policies_deny.yaml")

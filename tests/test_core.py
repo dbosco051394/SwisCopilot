@@ -1,5 +1,5 @@
 import pytest
-from core import SwisConfig, SwisRunner, ToolResult, PolicyEngine
+from swis.core import SwisConfig, SwisRunner, ToolResult, PolicyEngine
 
 def test_profile_strict():
     cfg = SwisConfig()
