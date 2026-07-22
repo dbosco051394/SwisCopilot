@@ -22,14 +22,16 @@ RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
     | sh -s -- -b /usr/local/bin
 
 # Install KICS
-RUN KICS_VERSION=$(curl -s https://api.github.com/repos/Checkmarx/kics/releases/latest \
-    | jq -r '.tag_name') && \
-    curl -sL "https://github.com/Checkmarx/kics/releases/download/${KICS_VERSION}/kics_${KICS_VERSION}_Linux_x64.tar.gz" \
+# Install KICS (correct asset name)
+RUN KICS_VERSION=2.1.20 && \
+    echo "Installing KICS version: ${KICS_VERSION}" && \
+    curl -sL "https://github.com/Checkmarx/kics/releases/download/v${KICS_VERSION}/kics_${KICS_VERSION}_linux_amd64.tar.gz" \
     -o /tmp/kics.tar.gz && \
     mkdir -p /opt/kics && \
     tar -xzf /tmp/kics.tar.gz -C /opt/kics && \
     ln -s /opt/kics/kics /usr/local/bin/kics && \
     rm /tmp/kics.tar.gz
+
 
 COPY swis.py /usr/local/bin/swis.py
 RUN chmod +x /usr/local/bin/swis.py
